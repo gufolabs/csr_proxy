@@ -156,3 +156,6 @@ warn_unused_ignores = false
 
 [tool.ruff.lint.isort]
 known-first-party = ["src"]
+
+[project.scripts]
+err = "csr_proxy.cli:main"

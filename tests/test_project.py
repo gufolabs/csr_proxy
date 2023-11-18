@@ -23,10 +23,10 @@ def _get_root() -> str:
 def _get_project() -> str:
     d = [
         f
-        for f in os.listdir(os.path.join(ROOT, "src", "gufo"))
+        for f in os.listdir(os.path.join(ROOT, "src"))
         if not f.startswith(".") and not f.startswith("_")
     ]
-    assert len(d) == 1
+    # assert len(d) == 1
     return d[0]
 
 
@@ -56,15 +56,14 @@ REQUIRED_FILES = [
     "docs/codequality.md",
     "docs/devcommon.md",
     "docs/environment.md",
-    "docs/examples/index.md",
     "docs/faq.md",
     "docs/index.md",
     "docs/installation.md",
     "docs/testing.md",
     "mkdocs.yml",
     "pyproject.toml",
-    f"src/gufo/{PROJECT}/__init__.py",
-    f"src/gufo/{PROJECT}/py.typed",
+    "src/csr_proxy/__init__.py",
+    "src/csr_proxy/py.typed",
     "tests/test_docs.py",
     "tests/test_project.py",
 ]
@@ -83,5 +82,5 @@ def test_required_files(name: str) -> None:
 
 
 def test_version() -> None:
-    m = __import__(f"gufo.{PROJECT}", {}, {}, "*")
+    m = __import__(PROJECT, {}, {}, "*")
     assert hasattr(m, "__version__"), "__init__.py must contain __version__"

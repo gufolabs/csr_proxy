@@ -8,5 +8,6 @@
 from .api import API
 
 
+# @todo: Version
 def main() -> None:
     API.run()
