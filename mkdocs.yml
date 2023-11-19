@@ -9,6 +9,7 @@ repo_name: gufolabs/csr_proxy
 nav:
   - Home: index.md
   - Installation: installation.md
+  - Reference: reference/
   - Developers' Guide:
       - Developer's Environment: environment.md
       - Building and Testing: testing.md
@@ -51,8 +52,12 @@ theme:
     - navigation.footer
 watch:
   - docs/
+  - src/
 plugins:
   - search
+  - gen-files:
+      scripts:
+        - docs/gen_doc_stubs.py
   - literate-nav:
       nav_file: SUMMARY.md
   - section-index

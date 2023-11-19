@@ -3,7 +3,7 @@
 # ---------------------------------------------------------------------
 # Copyright (C) 2023, Gufo Labs
 # ---------------------------------------------------------------------
-
+"""API endpoint."""
 # Python modules
 import asyncio
 import os
@@ -26,13 +26,31 @@ from .log import logger
 
 
 class API(object):
-    def __init__(self, config: Config) -> None:
+    """
+    API Enpoint.
+
+    Accepts the client requests and orchestrates
+    DNS and ACME servers.
+
+    Args:
+        config: Service configuration.
+    """
+
+    def __init__(self: "API", config: Config) -> None:
         self.config = config
         self.app = self._get_app()
         self.client_state: Optional[bytes] = None
         self.client_lock = asyncio.Lock()
 
-    async def get_client(self) -> PowerDnsAcmeClient:
+    async def get_client(self: "API") -> PowerDnsAcmeClient:
+        """
+        Get PowerDnsAcmeClient instance.
+
+        Updates state when necessary.
+
+        Returns:
+            Configured ACME client.
+        """
         async with self.client_lock:
             # Read state file when necessary
             if not self.client_state and os.path.exists(
@@ -82,7 +100,19 @@ class API(object):
         c = x509.load_pem_x509_csr(csr)
         return c.subject.rfc4514_string()
 
-    async def sign(self, request: Request) -> Response:
+    async def sign(self: "API", request: Request) -> Response:
+        """
+        Sign endpoint.
+
+        Accepts client's CSR, signs it and
+        returns the signed certificate.
+
+        Args:
+            request: HTTP request.
+
+        Returns:
+            HTTP Response.
+        """
         # Fetch CSR
         csr_body = await request.body()
         # Check subject
@@ -100,14 +130,21 @@ class API(object):
             cert = await client.sign(self.config.domain, csr_body)
         return Response(cert)
 
-    def _get_app(self) -> Starlette:
+    def _get_app(self: "API") -> Starlette:
+        """
+        Get Startlette app.
+
+        Returns:
+            Initialized Starlette instance.
+        """
         return Starlette(
             routes=[Route("/v1/sign", endpoint=self.sign, methods=["POST"])]
         )
 
     @staticmethod
-    def run() -> None:
-        config = Config.read()
+    def run(config: Optional[Config]) -> None:
+        """Run service."""
+        config = config or Config.read()
         api = API(config)
         logger.warning("Runnning csr-proxy v%s", __version__)
         uvicorn.run(api.app, port=config.api_port)

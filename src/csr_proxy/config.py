@@ -3,13 +3,14 @@
 # ---------------------------------------------------------------------
 # Copyright (C) 2023, Gufo Labs
 # ---------------------------------------------------------------------
-
+"""Config class."""
 # Python modules
 import os
 import re
 from dataclasses import dataclass
 from functools import cached_property
 from pathlib import Path
+from typing import Type
 
 DEFAULT_API_PORT = 8000
 DEFAULT_SUBJ = (
@@ -28,6 +29,20 @@ rx_subj = re.compile("CN=(.+?)(,|$)")
 
 @dataclass
 class Config(object):
+    """
+    The service's configuration.
+
+    Attributes:
+        api_port: API port to listen.
+        valid_subj: Certificate subject to pass.
+        state_path: A path to store ACME client state.
+            Must be readable and writable.
+        email: An email to register on ACME service.
+        acme_directoy: ACME directory URL.
+        pdns_api_url: Root URL of the PowerDNS api.
+        pdns_api_key: API key to authorize on PowerDNS.
+    """
+
     api_port: int
     valid_subj: str
     state_path: Path
@@ -37,7 +52,13 @@ class Config(object):
     pdns_api_key: str
 
     @classmethod
-    def default(cls) -> "Config":
+    def default(cls: Type["Config"]) -> "Config":
+        """
+        Get default config.
+
+        Returns:
+            Config instance.
+        """
         return Config(
             api_port=DEFAULT_API_PORT,
             valid_subj=DEFAULT_SUBJ,
@@ -49,7 +70,14 @@ class Config(object):
         )
 
     @classmethod
-    def read(cls, prefix: str = "CSR_PROXY_") -> "Config":
+    def read(cls: Type["Config"], prefix: str = "CSR_PROXY_") -> "Config":
+        """
+        Read config from environment.
+
+        Returns:
+            Config instance.
+        """
+
         def _get(env_name: str, default: str) -> str:
             full_env_name = f"{prefix}{env_name}"
             return os.getenv(full_env_name, str(default))
@@ -68,7 +96,13 @@ class Config(object):
         )
 
     @cached_property
-    def domain(self) -> str:
+    def domain(self: "Config") -> str:
+        """
+        Get domain name.
+
+        Returns:
+            Domain name.
+        """
         match = rx_subj.match(self.valid_subj)
         if match is None:
             msg = f"Invalid subject: {self.valid_subj}"

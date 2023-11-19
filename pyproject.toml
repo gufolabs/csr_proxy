@@ -158,4 +158,4 @@ warn_unused_ignores = false
 known-first-party = ["src"]
 
 [project.scripts]
-err = "csr_proxy.cli:main"
+csr-proxy = "csr_proxy.cli:main"
