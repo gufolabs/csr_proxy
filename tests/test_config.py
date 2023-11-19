@@ -42,4 +42,4 @@ def test_domain_invalid() -> None:
     cfg = Config.default()
     cfg.valid_subj = "go.getnoc.com"
     with pytest.raises(ValueError):
-        cfg.domain
+        _ = cfg.domain
