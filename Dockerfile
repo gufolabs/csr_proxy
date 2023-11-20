@@ -28,7 +28,7 @@ RUN \
 FROM python:3.12-slim-bullseye AS container
 COPY --from=build /workspace/dist/csr_proxy-*.whl /tmp
 WORKDIR /
-ENTRYPOINT /usr/local/bin/csr_proxy
+ENTRYPOINT /usr/local/bin/csr-proxy
 RUN \
     set -x\
     && pip install --upgrade pip \

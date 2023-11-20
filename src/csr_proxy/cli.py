@@ -146,12 +146,14 @@ class Cli(object):
             False - otherwise.
         """
         # Check state file
-        if not os.access(config.state_path, os.R_OK):
-            logger.error("%s is not readable. Stoppig", config.state_path)
+        state_dir = os.path.dirname(config.state_path)
+        if not os.access(state_dir, os.R_OK):
+            logger.error("%s is not readable. Stoppig", state_dir)
             return False
-        if not os.access(config.state_path, os.W_OK):
-            logger.error("%s is not writabl. Stoppig", config.state_path)
+        if not os.access(state_dir, os.W_OK):
+            logger.error("%s is not writabl. Stoppig", state_dir)
             return False
+        # Check PowerDNS settinngs
         if not config.pdns_api_url:
             logger.error("--pdns-api-url is missed")
             return False
