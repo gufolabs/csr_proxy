@@ -24,6 +24,7 @@ jobs:
     runs-on: ubuntu-20.04
     concurrency:
       group: sign
+      cancel-in-progress: false
     strategy:
       fail-fast: true
       matrix:
