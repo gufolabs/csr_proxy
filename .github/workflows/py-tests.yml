@@ -22,11 +22,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-20.04
-    concurrency:
-      group: sign
-      cancel-in-progress: false
     strategy:
       fail-fast: true
+      max-parallel: 1
       matrix:
         # Run on all supported versions
         python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
