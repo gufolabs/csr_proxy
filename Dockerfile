@@ -13,8 +13,24 @@ RUN \
     -r /tmp/docs.txt\
     -r /tmp/ipython.txt
 
+FROM python:3.12-slim-bullseye AS build
+COPY pyproject.toml /workspace/
+COPY src/ /workspace/src/
+WORKDIR /workspace/
+RUN \
+    set -x \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends git\
+    && pip install --upgrade pip\
+    && pip install --upgrade build\
+    && python -m build --wheel
+
 FROM python:3.12-slim-bullseye AS container
+COPY --from=build /workspace/dist/csr_proxy-*.whl /tmp
+WORKDIR /
+ENTRYPOINT /usr/local/bin/csr_proxy
 RUN \
     set -x\
-    && pip install --upgrade pip\
-    && pip install csr_proxy==0.1.0
+    && pip install --upgrade pip \
+    && pip install /tmp/csr_proxy-*.whl \
+    && rm /tmp/csr_proxy*
