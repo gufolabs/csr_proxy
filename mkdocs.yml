@@ -8,7 +8,9 @@ repo_url: https://github.com/gufolabs/csr_proxy/
 repo_name: gufolabs/csr_proxy
 nav:
   - Home: index.md
-  - Installation: installation.md
+  - Installation:
+      - Overview: installation/index.md
+      - Docker Installation: installation/docker.md
   - Reference: reference/
   - Developers' Guide:
       - Developer's Environment: environment.md
