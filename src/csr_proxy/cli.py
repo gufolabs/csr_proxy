@@ -81,6 +81,9 @@ class Cli(object):
         )
         parser.add_argument("-v", "--version", action="store_true")
         parser.add_argument(
+            "--api-host", default=config.api_host, help="API Host"
+        )
+        parser.add_argument(
             "--api-port", type=int, default=config.api_port, help="API Port"
         )
         parser.add_argument(

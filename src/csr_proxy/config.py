@@ -12,6 +12,7 @@ from functools import cached_property
 from pathlib import Path
 from typing import Type
 
+DEFAULT_API_HOST = "127.0.0.1"
 DEFAULT_API_PORT = 8000
 DEFAULT_SUBJ = (
     "CN=go.getnoc.com,OU=Gufo Thor,O=Gufo Labs,L=Milano,ST=Milano,C=IT"
@@ -33,6 +34,7 @@ class Config(object):
     The service's configuration.
 
     Attributes:
+        api_host: API host to listen.
         api_port: API port to listen.
         valid_subj: Certificate subject to pass.
         state_path: A path to store ACME client state.
@@ -43,6 +45,7 @@ class Config(object):
         pdns_api_key: API key to authorize on PowerDNS.
     """
 
+    api_host: str
     api_port: int
     valid_subj: str
     state_path: Path
@@ -60,6 +63,7 @@ class Config(object):
             Config instance.
         """
         return Config(
+            api_host=DEFAULT_API_HOST,
             api_port=DEFAULT_API_PORT,
             valid_subj=DEFAULT_SUBJ,
             state_path=Path(DEFAULT_STATE_PATH),
@@ -83,6 +87,7 @@ class Config(object):
             return os.getenv(full_env_name, str(default))
 
         return Config(
+            api_host=_get("API_HOST", DEFAULT_API_HOST),
             api_port=int(_get("API_PORT", str(DEFAULT_API_PORT))),
             valid_subj=_get("SUBJ", DEFAULT_SUBJ),
             state_path=Path(_get("STATE_PATH", DEFAULT_STATE_PATH)),

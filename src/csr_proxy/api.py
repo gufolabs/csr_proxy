@@ -148,4 +148,4 @@ class API(object):
         config = config or Config.read()
         api = API(config)
         logger.warning("Runnning csr-proxy v%s", __version__)
-        uvicorn.run(api.app, port=config.api_port)
+        uvicorn.run(api.app, host=config.api_host, port=config.api_port)
