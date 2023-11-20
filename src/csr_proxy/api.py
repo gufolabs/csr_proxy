@@ -41,6 +41,7 @@ class API(object):
         self.app = self._get_app()
         self.client_state: Optional[bytes] = None
         self.client_lock = asyncio.Lock()
+        self.sign_lock = asyncio.Lock()
 
     async def get_client(self: "API") -> PowerDnsAcmeClient:
         """
@@ -126,7 +127,7 @@ class API(object):
             )
             return Response("Invalid subject", status_code=400)
         # Get innitialized ACME client
-        async with await self.get_client() as client:
+        async with await self.get_client() as client, self.sign_lock:
             cert = await client.sign(self.config.domain, csr_body)
         return Response(cert)
 
