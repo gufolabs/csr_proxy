@@ -12,3 +12,9 @@ RUN \
     -r /tmp/lint.txt\
     -r /tmp/docs.txt\
     -r /tmp/ipython.txt
+
+FROM python:3.12-slim-bullseye AS container
+RUN \
+    set -x\
+    && pip install --upgrade pip\
+    && pip install csr_proxy==0.1.0
