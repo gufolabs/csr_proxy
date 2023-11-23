@@ -117,7 +117,6 @@ class Cli(object):
             "--eab-hmac",
             help="Extended account binding hmac key (base64/base64 url)",
         )
-        parser.add_argument()
         return parser.parse_args(args)
 
     @staticmethod
