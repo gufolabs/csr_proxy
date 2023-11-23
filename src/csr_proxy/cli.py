@@ -110,6 +110,14 @@ class Cli(object):
             default=config.pdns_api_key,
             help="PowerDNS API key",
         )
+        parser.add_argument(
+            "--eab-kid", help="Extended account binding key id"
+        )
+        parser.add_argument(
+            "--eab-hmac",
+            help="Extended account binding hmac key (base64/base64 url)",
+        )
+        parser.add_argument()
         return parser.parse_args(args)
 
     @staticmethod
@@ -135,6 +143,10 @@ class Cli(object):
             config.pdns_api_url = ns.pdns_api_url
         if ns.pdns_api_key:
             config.pdns_api_key = ns.pdns_api_key
+        if ns.eab_kid:
+            config.eab_kid = ns.eab_kid
+        if ns.eab_hmac:
+            config.eab_hmac = ns.eab_hmac
 
     @staticmethod
     def _validate_config(config: Config) -> bool:
@@ -162,6 +174,12 @@ class Cli(object):
             return False
         if not config.pdns_api_key:
             logger.error("--pdns-api-key is missed")
+            return False
+        if config.eab_kid and not config.eab_hmac:
+            logger.error("--eab-hmac is missed")
+            return False
+        if not config.eab_kid and config.eab_hmac:
+            logger.error("--eab-kid is missed")
             return False
         return True
 

@@ -113,7 +113,7 @@ classifiers = [
   "Typing :: Typed",
 ]
 dependencies = [
-  "gufo-acme == 0.2.0",
+  "gufo-acme == 0.3.0",
   "starlette == 0.32.0",
   "uvicorn == 0.24.0",
 ]

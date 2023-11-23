@@ -10,7 +10,7 @@ import re
 from dataclasses import dataclass
 from functools import cached_property
 from pathlib import Path
-from typing import Type
+from typing import Optional, Type
 
 DEFAULT_API_HOST = "127.0.0.1"
 DEFAULT_API_PORT = 8000
@@ -43,6 +43,8 @@ class Config(object):
         acme_directoy: ACME directory URL.
         pdns_api_url: Root URL of the PowerDNS api.
         pdns_api_key: API key to authorize on PowerDNS.
+        eab_kid: Optional external account binding key id.
+        eab_hmac: Optional external account binding HMAC (base64).
     """
 
     api_host: str
@@ -53,6 +55,8 @@ class Config(object):
     acme_directory: str
     pdns_api_url: str
     pdns_api_key: str
+    eab_kid: Optional[str] = None
+    eab_hmac: Optional[str] = None
 
     @classmethod
     def default(cls: Type["Config"]) -> "Config":
@@ -86,6 +90,10 @@ class Config(object):
             full_env_name = f"{prefix}{env_name}"
             return os.getenv(full_env_name, str(default))
 
+        def _maybe_get(env_name: str) -> Optional[str]:
+            full_env_name = f"{prefix}{env_name}"
+            return os.getenv(full_env_name)
+
         return Config(
             api_host=_get("API_HOST", DEFAULT_API_HOST),
             api_port=int(_get("API_PORT", str(DEFAULT_API_PORT))),
@@ -98,6 +106,8 @@ class Config(object):
             ),
             pdns_api_url=_get("PDNS_API_URL", DEFAULT_PDNS_API_URL),
             pdns_api_key=_get("PDNS_API_KEY", DEFAULT_PDNS_API_KEY),
+            eab_kid=_maybe_get("EAB_KID"),
+            eab_hmac=_maybe_get("EAB_HMAC"),
         )
 
     @cached_property

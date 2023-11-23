@@ -14,6 +14,7 @@ from cryptography import x509
 
 # Third-party modules
 from gufo.acme.clients.powerdns import PowerDnsAcmeClient
+from gufo.acme.types import ExternalAccountBinding
 from starlette.applications import Starlette
 from starlette.requests import Request
 from starlette.responses import Response
@@ -77,7 +78,16 @@ class API(object):
                 api_url=self.config.pdns_api_url,
                 api_key=self.config.pdns_api_key,
             )
-            await client.new_account(self.config.email)
+            if self.config.eab_kid and self.config.eab_hmac:
+                eab = ExternalAccountBinding(
+                    kid=self.config.eab_kid,
+                    hmac_key=PowerDnsAcmeClient.decode_auto_base64(
+                        self.config.eab_hmac
+                    ),
+                )
+            else:
+                eab = None
+            await client.new_account(self.config.email, external_binding=eab)
             # Save state
             self.client_state = client.get_state()
             logger.warning(

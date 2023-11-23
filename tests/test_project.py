@@ -21,18 +21,35 @@ def _get_root() -> str:
     return os.path.abspath(os.path.join(rel_root, ".."))
 
 
-def _get_project() -> str:
-    d = [
-        f
-        for f in os.listdir(os.path.join(ROOT, "src"))
-        if not f.startswith(".") and not f.startswith("_")
-    ]
-    # assert len(d) == 1
-    return d[0]
+def _get_project_info() -> Tuple[str, str]:
+    """
+    Get project information.
+
+    Returns:
+        Tuple of (project path, project module)
+    """
+
+    def explore_dir(*args: str) -> str:
+        d = [
+            f
+            for f in os.listdir(os.path.join(*args))
+            if not f.startswith(".")
+            and not f.startswith("_")
+            and not f.endswith(".egg-info")
+        ]
+        assert len(d) == 1
+        return d[0]
+
+    ns = explore_dir(ROOT, "src")
+    if ns == "gufo":
+        # gufo.* namespace
+        pkg = explore_dir(ROOT, "src", ns)
+        return os.path.join("src", ns, pkg), f"{ns}.{pkg}"
+    return os.path.join("src", ns), ns
 
 
 ROOT = _get_root()
-PROJECT = _get_project()
+PROJECT_SRC, PROJECT_MODULE = _get_project_info()
 
 REQUIRED_FILES = [
     ".devcontainer/devcontainer.json",
@@ -63,8 +80,8 @@ REQUIRED_FILES = [
     "docs/testing.md",
     "mkdocs.yml",
     "pyproject.toml",
-    "src/csr_proxy/__init__.py",
-    "src/csr_proxy/py.typed",
+    f"{PROJECT_SRC}/__init__.py",
+    f"{PROJECT_SRC}/py.typed",
     "tests/test_docs.py",
     "tests/test_project.py",
 ]
@@ -92,5 +109,5 @@ def test_required_files(name: Union[str, Tuple[str, ...]]) -> None:
 
 
 def test_version() -> None:
-    m = __import__(PROJECT, {}, {}, "*")
+    m = __import__(PROJECT_MODULE, {}, {}, "*")
     assert hasattr(m, "__version__"), "__init__.py must contain __version__"
