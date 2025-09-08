@@ -1,7 +1,7 @@
 # ---------------------------------------------------------------------
 # CSR Proxy: Main entrypoint
 # ---------------------------------------------------------------------
-# Copyright (C) 2023, Gufo Labs
+# Copyright (C) 2023-25, Gufo Labs
 # ---------------------------------------------------------------------
 """Command line parsing and service starting."""
 
@@ -13,7 +13,7 @@ from enum import IntEnum
 from typing import List
 
 # Third-party modules
-from gufo.err import err
+from gufo.err.err import err
 
 # CSR Proxy modules
 from . import __version__

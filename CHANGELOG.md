@@ -24,6 +24,8 @@ To see unreleased changes, please see the [CHANGELOG on the master branch](https
 ### Infrastructure
 
 * Replace black with ruff format
+* ruff 0.11.2
+* mypy 1.13.0
 
 ## 0.2.0 - 2023-11-23
 
