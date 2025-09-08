@@ -12,6 +12,7 @@ from functools import cached_property
 from pathlib import Path
 from typing import Optional, Type
 
+DEFAULT_TRACE_FORMAT = "terse"
 DEFAULT_API_HOST = "127.0.0.1"
 DEFAULT_API_PORT = 8000
 DEFAULT_SUBJ = (
@@ -34,6 +35,7 @@ class Config(object):
     The service's configuration.
 
     Attributes:
+        trace_format: Traceback format. "terse" or "extend"
         api_host: API host to listen.
         api_port: API port to listen.
         valid_subj: Certificate subject to pass.
@@ -47,6 +49,7 @@ class Config(object):
         eab_hmac: Optional external account binding HMAC (base64).
     """
 
+    trace_format: str
     api_host: str
     api_port: int
     valid_subj: str
@@ -67,6 +70,7 @@ class Config(object):
             Config instance.
         """
         return Config(
+            trace_format=DEFAULT_TRACE_FORMAT,
             api_host=DEFAULT_API_HOST,
             api_port=DEFAULT_API_PORT,
             valid_subj=DEFAULT_SUBJ,
@@ -95,6 +99,7 @@ class Config(object):
             return os.getenv(full_env_name)
 
         return Config(
+            trace_format=_get("TRACE_FORMAT", DEFAULT_TRACE_FORMAT),
             api_host=_get("API_HOST", DEFAULT_API_HOST),
             api_port=int(_get("API_PORT", str(DEFAULT_API_PORT))),
             valid_subj=_get("SUBJ", DEFAULT_SUBJ),

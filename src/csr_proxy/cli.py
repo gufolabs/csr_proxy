@@ -11,6 +11,9 @@ import sys
 from enum import IntEnum
 from typing import List
 
+# Third-party modules
+from gufo.err import err
+
 # CSR Proxy modules
 from . import __version__
 from .api import API
@@ -56,6 +59,8 @@ class Cli(object):
         # Validate configuration
         if not self._validate_config(config):
             return ExitCode.ERR
+        # Setup error reporting
+        self._setup_trace(config)
         # Run
         API.run(config)
         return ExitCode.OK
@@ -80,6 +85,12 @@ class Cli(object):
             ),
         )
         parser.add_argument("-v", "--version", action="store_true")
+        parser.add_argument(
+            "--trace-format",
+            default=config.trace_format,
+            help="Traceback format",
+            choices=["terse", "extend"],
+        )
         parser.add_argument(
             "--api-host", default=config.api_host, help="API Host"
         )
@@ -128,6 +139,8 @@ class Cli(object):
             config: Config
             ns: Namespace
         """
+        if ns.trace_format:
+            config.trace_format = ns.trace_format
         if ns.api_port:
             config.api_port = ns.api_port
         if ns.valid_subj:
@@ -181,6 +194,22 @@ class Cli(object):
             logger.error("--eab-kid is missed")
             return False
         return True
+
+    @staticmethod
+    def _setup_trace(config: Config) -> None:
+        """
+        Setup error reporting.
+
+        Args:
+            config: Config instance
+        """
+        err.setup(
+            catch_all=True,
+            root_module="csr_proxy",
+            name=NAME,
+            version=__version__,
+            format=config.trace_format,
+        )
 
     def handle_version(self: "Cli") -> ExitCode:
         """

@@ -1,3 +1,4 @@
 starlette==0.32.0
 uvicorn==0.24.0
-gufo-acme==0.3.0
+gufo-acme>=0.4.0
+gufo-err==0.4.0
