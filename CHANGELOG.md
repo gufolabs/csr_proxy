@@ -10,6 +10,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 To see unreleased changes, please see the [CHANGELOG on the master branch](https://github.com/gufolabs/csr_proxy/blob/master/CHANGELOG.md) guide.
 
+## [Unreleased]
+
+### Added
+
+* `--trace-format` option.
+
+### Security
+
+* docker: Install security patches.
+* docker: Use python:3.13-slim-trixie as base.
+
 ## 0.2.0 - 2023-11-23
 
 ### Added
