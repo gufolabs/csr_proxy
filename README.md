@@ -3,6 +3,7 @@
 *CSR Proxy is a simple service to sign the clients' CSR via the ACME server.*
 
 [![PyPi version](https://img.shields.io/pypi/v/csr_proxy.svg)](https://pypi.python.org/pypi/csr_proxy/)
+![Downloads](https://img.shields.io/pypi/dw/csr_proxy)
 ![Python Versions](https://img.shields.io/pypi/pyversions/csr_proxy)
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 ![Build](https://img.shields.io/github/actions/workflow/status/gufolabs/csr_proxy/py-tests.yml?branch=master)
@@ -133,5 +134,5 @@ can benefit from [Gufo Stack][Gufo Stack] too. So we believe that our effort wil
 the other network management products better.
 
 [Gufo Labs]: https://gufolabs.com/
-[Gufo Stack]: https://gufolabs.com/products/gufo-stack/
+[Gufo Stack]: https://docs.gufolabs.com/
 [NOC]: https://getnoc.com/
