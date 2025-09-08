@@ -4,6 +4,7 @@
 # Copyright (C) 2023, Gufo Labs
 # ---------------------------------------------------------------------
 """Command line parsing and service starting."""
+
 # Python modules
 import argparse
 import os
@@ -80,8 +81,7 @@ class Cli(object):
         parser = argparse.ArgumentParser(
             prog=NAME,
             description=(
-                "Simple service to sign the clients' CSR"
-                "via the ACME server."
+                "Simple service to sign the clients' CSRvia the ACME server."
             ),
         )
         parser.add_argument("-v", "--version", action="store_true")

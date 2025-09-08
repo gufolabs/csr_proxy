@@ -4,6 +4,7 @@
 # Copyright (C) 2023, Gufo Labs
 # ---------------------------------------------------------------------
 """Config class."""
+
 # Python modules
 import os
 import re

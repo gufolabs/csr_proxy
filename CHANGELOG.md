@@ -21,6 +21,10 @@ To see unreleased changes, please see the [CHANGELOG on the master branch](https
 * docker: Install security patches.
 * docker: Use python:3.13-slim-trixie as base.
 
+### Infrastructure
+
+* Replace black with ruff format
+
 ## 0.2.0 - 2023-11-23
 
 ### Added

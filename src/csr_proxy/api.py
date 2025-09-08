@@ -4,6 +4,7 @@
 # Copyright (C) 2023, Gufo Labs
 # ---------------------------------------------------------------------
 """API endpoint."""
+
 # Python modules
 import asyncio
 import os

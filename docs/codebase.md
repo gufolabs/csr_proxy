@@ -11,14 +11,6 @@ The code base of the project has following structure:
     * `workflows/` - [GitHub Actions Workflows][GitHub Workflows] settings.
       Used to run tests and build the documentation.
 
-* `.requirements/` - Python dependencies for development environment.
-
-    * `deps.txt` - Direct dependencies.
-    * `docs.txt` - [Mkdocs Material][Mkdocs Material] dependencies.
-    * `ipython.txt` - [IPython] dependencies.
-    * `lint.txt` - [Black][Black], [Ruff][Ruff], and [Mypy][Mypy] dependencies.
-    * `test.txt` - [Pytest][Pytest] dependencies.
-
 * `docs/` - [Mkdocs][Mkdocs] documentation.
 * `src/` - Project's source code.
 * `tests/` - Project's [Pytest][Pytest] test suite.
@@ -31,9 +23,6 @@ The code base of the project has following structure:
 [GitHub Workflows]: https://docs.github.com/en/actions/using-workflows
 [Mkdocs]: https://www.mkdocs.org
 [Mkdocs Material]: https://squidfunk.github.io/mkdocs-material/
-[Black]: https://black.readthedocs.io/en/stable
-[Ruff]: https://docs.astral.sh/ruff/
-[Mypy]: https://mypy.readthedocs.io/en/stable/
 [Pytest]: https://docs.pytest.org/
 [Dockerfile]: https://docs.docker.com/engine/reference/builder/
 [Gitignore]: https://git-scm.com/docs/gitignore
