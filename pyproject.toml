@@ -98,12 +98,11 @@ authors = [{name = "Gufo Labs"}]
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Intended Audience :: Developers",
-  "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
-  "License :: OSI Approved :: BSD License",
+  "Programming Language :: Python :: 3.13",
   "Topic :: Software Development",
   "Topic :: Software Development :: Libraries",
   "Topic :: Software Development :: Libraries :: Python Modules",
@@ -116,9 +115,10 @@ dependencies = [
   "starlette == 0.32.0",
   "uvicorn == 0.24.0",
 ]
+description = "CSR Proxy is a simple service to sign the clients' CSR via the ACME server"
 dynamic = ["version"]
 keywords = ["ACME", "CSR", "Proxy"]
-license = {text = "BSD 3-Clause License"}
+license = "BSD-3-Clause"
 name = "csr_proxy"
 requires-python = ">=3.8"
 
