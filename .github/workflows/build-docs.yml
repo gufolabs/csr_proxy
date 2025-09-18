@@ -6,7 +6,7 @@ on:
   push:
     paths:
       - ".github/workflows/build-docs.yml"
-      - ".requirements/docs.txt"
+      - "pyproject.toml"
       - "docs/**"
       - "examples/**"
       - "src/**"
@@ -16,7 +16,7 @@ on:
 jobs:
   build-push:
     name: "Build & Push Docs"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
       # Checkout source code
       - name: Checkout
@@ -27,12 +27,12 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ./.pip
-          key: ${{ runner.os }}-docs-${{ hashFiles('./.requirements/docs.txt') }}
+          key: ${{ runner.os }}-docs-${{ hashFiles('pyproject.toml') }}
 
       # Install dependencies
       - name: Install Dependencies
         run: |
-          pip install -IU -r ./.requirements/docs.txt  -r ./.requirements/deps.txt
+          pip install -IU -e .[docs]
 
       # Build documentationn
       - name: Build & Deploy Docs

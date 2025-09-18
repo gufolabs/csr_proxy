@@ -20,12 +20,15 @@ To see unreleased changes, please see the [CHANGELOG on the master branch](https
 
 * docker: Install security patches.
 * docker: Use python:3.13-slim-trixie as base.
+* Gufo ACME 0.6.0
 
 ### Infrastructure
 
 * Replace black with ruff format
 * ruff 0.11.2
 * mypy 1.13.0
+* Codecov integration.
+* Move dependencies to pyproject.toml
 
 ## 0.2.0 - 2023-11-23
 
