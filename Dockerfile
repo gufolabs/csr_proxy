@@ -1,5 +1,6 @@
 FROM python:3.13-slim-trixie AS dev
-COPY .requirements /tmp
+COPY . /workspaces/csr_proxy
+WORKDIR /workspaces/csr_proxy
 RUN \
     set -x \
     && apt-get update \
@@ -8,17 +9,9 @@ RUN \
     && apt-get install -y --no-install-recommends git\
     && pip install --upgrade pip\
     && pip install --upgrade build\
-    && pip install \
-    -r /tmp/deps.txt\
-    -r /tmp/test.txt\
-    -r /tmp/lint.txt\
-    -r /tmp/docs.txt\
-    -r /tmp/ipython.txt
+    && pip install -e .[deps,test,lint,docs,ipython,test-extra]
 
 FROM python:3.13-slim-trixie AS build
-COPY pyproject.toml /workspace/
-COPY src/ /workspace/src/
-WORKDIR /workspace/
 RUN \
     set -x \
     && apt-get update \

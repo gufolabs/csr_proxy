@@ -75,7 +75,7 @@ jobs:
         run: python -m pip install --upgrade pip
 
       - name: Install Dependencies
-        run: pip install -IU -e .[test]
+        run: pip install -IU -e .[test,test-extra]
 
       - name: Run Tests
         run: pytest -v --cov --cov-branch --cov-report=xml tests/
@@ -120,7 +120,7 @@ jobs:
         run: pip install --upgrade build
 
       - name: Install Dependencies
-        run: pip install -IU -e .[test]
+        run: pip install -IU -e .[test,test-extra]
 
       - name: Run Tests
         run: pytest -v tests/

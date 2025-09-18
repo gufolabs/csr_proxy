@@ -144,6 +144,9 @@ test = [
   "pytest-cov==7.0.0",
   "PyYAML>=6.0",
 ]
+test-extra = [
+  "httpx==0.28.1",
+]
 
 [project.readme]
 content-type = "text/markdown"
