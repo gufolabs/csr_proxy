@@ -116,9 +116,6 @@ jobs:
       - name: Upgrade Pip
         run: python -m pip install --upgrade pip
 
-      - name: Upgrade Build
-        run: pip install --upgrade build
-
       - name: Install Dependencies
         run: pip install -IU -e .[test,test-extra]
 
