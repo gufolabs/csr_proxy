@@ -10,12 +10,12 @@ import tempfile
 
 # Third-party modules
 import pytest
+from gufo.acme.clients.base import AcmeClient
+from starlette.testclient import TestClient
 
 # CSR Proxy modules
 from csr_proxy.api import API
 from csr_proxy.config import Config
-from gufo.acme.clients.base import AcmeClient
-from starlette.testclient import TestClient
 
 EMAIL = "acme-000000000@gufolabs.com"
 
@@ -32,11 +32,13 @@ def to_skip_scenario() -> bool:
     )
 
 
-@pytest.mark.skipif(
-    to_skip_scenario(),
-    reason=f"{ENV_CI_CSR_PROXY_TEST_DOMAIN}, {ENV_CI_CSR_PROXY_TEST_API_URL}, {ENV_CI_CSR_PROXY_TEST_API_KEY}"
-    " variables must be set",
+SKIP_REASON = (
+    f"{ENV_CI_CSR_PROXY_TEST_DOMAIN}, {ENV_CI_CSR_PROXY_TEST_API_URL}, {ENV_CI_CSR_PROXY_TEST_API_KEY}"
+    " variables must be set"
 )
+
+
+@pytest.mark.skipif(to_skip_scenario(), reason=SKIP_REASON)
 def test_sign() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         config = Config.default()
@@ -60,11 +62,7 @@ def test_sign() -> None:
             assert response.status_code == 200
 
 
-@pytest.mark.skipif(
-    to_skip_scenario(),
-    reason=f"{ENV_CI_CSR_PROXY_TEST_DOMAIN}, {ENV_CI_CSR_PROXY_TEST_API_URL}, {ENV_CI_CSR_PROXY_TEST_API_KEY}"
-    " variables must be set",
-)
+@pytest.mark.skipif(to_skip_scenario(), reason=SKIP_REASON)
 def test_invalid_sub() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         config = Config.default()

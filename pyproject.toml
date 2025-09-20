@@ -112,7 +112,7 @@ classifiers = [
 dependencies = [
   "gufo-acme >= 0.6.0",
   "gufo-err >= 0.4.0",
-  "starlette == 0.32.0",
+  "starlette == 0.48.0",
   "uvicorn == 0.36.0",
 ]
 description = "CSR Proxy is a simple service to sign the clients' CSR via the ACME server"
