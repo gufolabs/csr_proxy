@@ -15,10 +15,16 @@ To see unreleased changes, please see the [CHANGELOG on the master branch](https
 ### Added
 
 * `--trace-format` option.
+* Python 3.13 support.
+
+### Removed
+
+* Python 3.8 support.
 
 ### Changed
 
 * uvicorn 0.36.0
+* starlette 0.48.0
 
 ### Security
 
