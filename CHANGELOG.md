@@ -16,6 +16,10 @@ To see unreleased changes, please see the [CHANGELOG on the master branch](https
 
 * `--trace-format` option.
 
+### Changed
+
+* uvicorn 0.36.0
+
 ### Security
 
 * docker: Install security patches.
