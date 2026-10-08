@@ -26,6 +26,7 @@ To see unreleased changes, please see the [CHANGELOG on the master branch](https
 
 ### Changed
 
+* Gufo ACME 0.7.0
 * uvicorn 0.36.0
 * starlette 0.48.0
 
