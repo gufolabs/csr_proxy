@@ -1,14 +1,13 @@
 # ---------------------------------------------------------------------
 # CSR Proxy: API handler
 # ---------------------------------------------------------------------
-# Copyright (C) 2023, Gufo Labs
+# Copyright (C) 2023-26, Gufo Labs
 # ---------------------------------------------------------------------
 """API endpoint."""
 
 # Python modules
 import asyncio
 import os
-from typing import Optional
 
 import uvicorn
 from cryptography import x509
@@ -27,7 +26,7 @@ from .config import Config
 from .log import logger
 
 
-class API(object):
+class API:
     """
     API Enpoint.
 
@@ -41,7 +40,7 @@ class API(object):
     def __init__(self: "API", config: Config) -> None:
         self.config = config
         self.app = self._get_app()
-        self.client_state: Optional[bytes] = None
+        self.client_state: bytes | None = None
         self.client_lock = asyncio.Lock()
         self.sign_lock = asyncio.Lock()
 
@@ -154,7 +153,7 @@ class API(object):
         )
 
     @staticmethod
-    def run(config: Optional[Config]) -> None:
+    def run(config: Config | None) -> None:
         """Run service."""
         config = config or Config.read()
         api = API(config)

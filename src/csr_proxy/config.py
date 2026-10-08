@@ -1,7 +1,7 @@
 # ---------------------------------------------------------------------
 # CSR Proxy: Configuration
 # ---------------------------------------------------------------------
-# Copyright (C) 2023, Gufo Labs
+# Copyright (C) 2023-26, Gufo Labs
 # ---------------------------------------------------------------------
 """Config class."""
 
@@ -11,7 +11,6 @@ import re
 from dataclasses import dataclass
 from functools import cached_property
 from pathlib import Path
-from typing import Optional, Type
 
 DEFAULT_TRACE_FORMAT = "terse"
 DEFAULT_API_HOST = "127.0.0.1"
@@ -31,7 +30,7 @@ rx_subj = re.compile("CN=(.+?)(,|$)")
 
 
 @dataclass
-class Config(object):
+class Config:
     """
     The service's configuration.
 
@@ -59,11 +58,11 @@ class Config(object):
     acme_directory: str
     pdns_api_url: str
     pdns_api_key: str
-    eab_kid: Optional[str] = None
-    eab_hmac: Optional[str] = None
+    eab_kid: str | None = None
+    eab_hmac: str | None = None
 
     @classmethod
-    def default(cls: Type["Config"]) -> "Config":
+    def default(cls: type["Config"]) -> "Config":
         """
         Get default config.
 
@@ -83,7 +82,7 @@ class Config(object):
         )
 
     @classmethod
-    def read(cls: Type["Config"], prefix: str = "CSR_PROXY_") -> "Config":
+    def read(cls: type["Config"], prefix: str = "CSR_PROXY_") -> "Config":
         """
         Read config from environment.
 
@@ -95,7 +94,7 @@ class Config(object):
             full_env_name = f"{prefix}{env_name}"
             return os.getenv(full_env_name, str(default))
 
-        def _maybe_get(env_name: str) -> Optional[str]:
+        def _maybe_get(env_name: str) -> str | None:
             full_env_name = f"{prefix}{env_name}"
             return os.getenv(full_env_name)
 

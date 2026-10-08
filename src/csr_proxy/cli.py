@@ -1,7 +1,7 @@
 # ---------------------------------------------------------------------
 # CSR Proxy: Main entrypoint
 # ---------------------------------------------------------------------
-# Copyright (C) 2023-25, Gufo Labs
+# Copyright (C) 2023-26, Gufo Labs
 # ---------------------------------------------------------------------
 """Command line parsing and service starting."""
 
@@ -10,7 +10,6 @@ import argparse
 import os
 import sys
 from enum import IntEnum
-from typing import List
 
 # Third-party modules
 from gufo.err.err import err
@@ -36,10 +35,10 @@ class ExitCode(IntEnum):
     ERR = 1
 
 
-class Cli(object):
+class Cli:
     """Command-line proceessing."""
 
-    def run(self: "Cli", args: List[str]) -> ExitCode:
+    def run(self: "Cli", args: list[str]) -> ExitCode:
         """
         Run csr-proxy from arguments.
 
@@ -67,7 +66,7 @@ class Cli(object):
         return ExitCode.OK
 
     @staticmethod
-    def _parse_args(config: Config, args: List[str]) -> argparse.Namespace:
+    def _parse_args(config: Config, args: list[str]) -> argparse.Namespace:
         """
         Parse command-line arguments and return Namespace.
 
