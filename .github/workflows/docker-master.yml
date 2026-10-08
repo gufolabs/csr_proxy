@@ -40,7 +40,7 @@ jobs:
       - name: Check image
         id: check
         env:
-          IMAGE: ghcr.io/gufolabs/noc:${{ matrix.tag }}
+          IMAGE: ghcr.io/gufolabs/csr-proxy:${{ matrix.tag }}
         run: |
           COMMIT=$(git rev-parse HEAD)
           echo "commit=$COMMIT" >> "$GITHUB_OUTPUT"
@@ -64,7 +64,7 @@ jobs:
       - name: Build and push image
         if: steps.check.outputs.skip != 'true'
         env:
-          IMAGE: ghcr.io/gufolabs/noc:${{ matrix.tag }}
+          IMAGE: ghcr.io/gufolabs/csr-proxy:${{ matrix.tag }}
           COMMIT: ${{ steps.check.outputs.commit }}
         run: |
           docker buildx build \
