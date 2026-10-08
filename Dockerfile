@@ -1,4 +1,4 @@
-FROM python:3.13-slim-trixie AS dev
+FROM python:3.14-slim-trixie AS dev
 COPY . /workspaces/csr_proxy
 WORKDIR /workspaces/csr_proxy
 RUN \
@@ -11,7 +11,7 @@ RUN \
     && pip install --upgrade build\
     && pip install -e .[deps,test,lint,docs,ipython,test-extra]
 
-FROM python:3.13-slim-trixie AS build
+FROM python:3.14-slim-trixie AS build
 RUN \
     set -x \
     && apt-get update \
@@ -20,7 +20,7 @@ RUN \
     && pip install --upgrade build\
     && python -m build --wheel
 
-FROM python:3.13-slim-trixie AS container
+FROM python:3.14-slim-trixie AS container
 COPY --from=build /workspace/dist/csr_proxy-*.whl /tmp
 WORKDIR /
 ENTRYPOINT /usr/local/bin/csr-proxy
