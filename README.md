@@ -5,6 +5,7 @@
 [![PyPi version](https://img.shields.io/pypi/v/csr_proxy.svg)](https://pypi.python.org/pypi/csr_proxy/)
 ![Downloads](https://img.shields.io/pypi/dw/csr_proxy)
 ![Python Versions](https://img.shields.io/pypi/pyversions/csr_proxy)
+[![Discord](https://img.shields.io/discord/1545437404159156304?label=Discord&logo=discord&logoColor=white)](https://discord.gg/csVjGG38Z)
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 ![Build](https://img.shields.io/github/actions/workflow/status/gufolabs/csr_proxy/py-tests.yml?branch=master)
 [![codecov](https://codecov.io/gh/gufolabs/csr_proxy/graph/badge.svg?token=3RMT547FXK)](https://codecov.io/gh/gufolabs/csr_proxy)

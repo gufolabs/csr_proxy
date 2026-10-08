@@ -155,6 +155,7 @@ file = "README.md"
 [project.urls]
 "Bug Tracker" = "https://github.com/gufolabs/csr_proxy/issues"
 Changelog = "https://github.com/gufolabs/csr_proxy/blob/master/CHANGELOG.md"
+Discord = "https://discord.gg/csVjGG38Z"
 Documentation = "https://docs.gufolabs.com/csr_proxy/"
 Homepage = "https://github.com/gufolabs/csr_proxy/"
 "Source Code" = "https://github.com/gufolabs/csr_proxy/"
