@@ -12,6 +12,8 @@ RUN \
     && pip install -e .[deps,test,lint,docs,ipython,test-extra]
 
 FROM python:3.14-slim-trixie AS build
+COPY . /workspace
+WORKDIR /workspace
 RUN \
     set -x \
     && apt-get update \
