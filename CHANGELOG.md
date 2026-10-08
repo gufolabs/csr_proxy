@@ -17,6 +17,7 @@ To see unreleased changes, please see the [CHANGELOG on the master branch](https
 * `--trace-format` option.
 * Python 3.13 support.
 * Python 3.14 support.
+* Docker image build.
 
 ### Removed
 
