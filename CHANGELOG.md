@@ -18,6 +18,7 @@ To see unreleased changes, please see the [CHANGELOG on the master branch](https
 * Python 3.13 support.
 * Python 3.14 support.
 * Docker image build.
+* Discord server.
 
 ### Removed
 
