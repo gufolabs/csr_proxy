@@ -25,7 +25,7 @@ def _get_root() -> str:
 
 VERSIONS = [
     "actions/cache@v5",
-    "actions/checkout@v6",
+    "actions/checkout@v7",
     "actions/setup-python@v6",
     "actions/download-artifact@v8",
     "actions/upload-artifact@v7",
